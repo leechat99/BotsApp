@@ -6,7 +6,7 @@ var BotsAppClass = require("../sidekick/sidekick")
 
 
 exports.resolve = function(messageInstance, client, groupMetadata) {
-    var BotsApp = new BotsAppClass();
+    var lechatbot = new BotsAppClass();
     var prefix = config.PREFIX + '\\w+'
     var prefixRegex = new RegExp(prefix, 'g');
     var SUDOstring = config.SUDO;
@@ -17,43 +17,43 @@ exports.resolve = function(messageInstance, client, groupMetadata) {
     }
     // console.log(messageInstance);
     // console.log(jsonMessage);
-    BotsApp.chatId = messageInstance.key.remoteJid || '';
-    BotsApp.fromMe = messageInstance.key.fromMe;
-    BotsApp.owner = client.user.jid || '';
-    BotsApp.mimeType = messageInstance.message ? Object.keys(messageInstance.message)[0] : null;
-    BotsApp.type = BotsApp.mimeType === 'imageMessage' ? 'image' : (BotsApp.mimeType === 'videoMessage') ? 'video' : (BotsApp.mimeType === 'conversation' || BotsApp.mimeType == 'extendedTextMessage') ? 'text' : (BotsApp.mimeType === 'audioMessage') ? 'audio' : (BotsApp.mimeType === 'stickerMessage') ? 'sticker' : '';
-    BotsApp.isReply = (BotsApp.mimeType === 'extendedTextMessage' && messageInstance.message.extendedTextMessage.hasOwnProperty('contextInfo') && messageInstance.message.extendedTextMessage.contextInfo.hasOwnProperty('stanzaId'));
-    BotsApp.replyMessageId = (BotsApp.isReply && messageInstance.message.extendedTextMessage.contextInfo) ? messageInstance.message.extendedTextMessage.contextInfo.stanzaId : '';
-    BotsApp.replyMessage = (BotsApp.isReply && messageInstance.message.extendedTextMessage.contextInfo) ? messageInstance.message.extendedTextMessage.contextInfo.quotedMessage.conversation : '';
-    BotsApp.replyParticipant = (BotsApp.isReply && messageInstance.message.extendedTextMessage.contextInfo) ? messageInstance.message.extendedTextMessage.contextInfo.participant : '';
-    BotsApp.body = BotsApp.mimeType === 'conversation' ? messageInstance.message.conversation : (BotsApp.mimeType == 'imageMessage') ? messageInstance.message.imageMessage.caption : (BotsApp.mimeType == 'videoMessage') ? messageInstance.message.videoMessage.caption : (BotsApp.mimeType == 'extendedTextMessage') ? messageInstance.message.extendedTextMessage.text : (BotsApp.mimeType == 'buttonsResponseMessage') ? messageInstance.message.buttonsResponseMessage.selectedDisplayText :'';
-    BotsApp.isCmd = prefixRegex.test(BotsApp.body);
-    BotsApp.commandName = BotsApp.isCmd ? BotsApp.body.slice(1).trim().split(/ +/).shift().toLowerCase() : '';
-    BotsApp.isImage = BotsApp.type === "image";
-    BotsApp.isReplyImage = BotsApp.isReply ? jsonMessage.indexOf("imageMessage") !== -1 : false;
-    BotsApp.imageCaption = BotsApp.isImage ? messageInstance.message.imageMessage.caption : '';
-    BotsApp.isGIF = (BotsApp.type === 'video' && messageInstance.message.videoMessage.gifPlayback);
-    BotsApp.isReplyGIF = BotsApp.isReply ? (jsonMessage.indexOf("videoMessage") !== -1 && messageInstance.message.extendedTextMessage.contextInfo.quotedMessage.videoMessage.gifPlayback) : false;
-    BotsApp.isSticker = BotsApp.type === 'sticker';
-    BotsApp.isReplySticker = BotsApp.isReply ? jsonMessage.indexOf("stickerMessage") !== -1 : false;
-    BotsApp.isReplyAnimatedSticker = BotsApp.isReplySticker ? messageInstance.message.extendedTextMessage.contextInfo.quotedMessage.stickerMessage.isAnimated :false;
-    BotsApp.isVideo = (BotsApp.type === 'video' && !messageInstance.message.videoMessage.gifPlayback);
-    BotsApp.isReplyVideo = BotsApp.isReply ? (jsonMessage.indexOf("videoMessage") !== -1 && !messageInstance.message.extendedTextMessage.contextInfo.quotedMessage.videoMessage.gifPlayback) : false;
-    BotsApp.isAudio = BotsApp.type === 'audio';
-    BotsApp.isReplyAudio = BotsApp.isReply ? jsonMessage.indexOf("audioMessage") !== -1 : false;
-    BotsApp.logGroup = client.user.jid || '';
-    BotsApp.isGroup = BotsApp.chatId.endsWith('@g.us');
-    BotsApp.isPm = !BotsApp.isGroup;
-    BotsApp.sender =  (BotsApp.isGroup && messageInstance.message && BotsApp.fromMe) ? BotsApp.owner : (BotsApp.isGroup && messageInstance.message) ? messageInstance.participant : (!BotsApp.isGroup) ? BotsApp.chatId: '';
-    BotsApp.groupName = BotsApp.isGroup ? groupMetadata.subject : '';
-    BotsApp.groupMembers = BotsApp.isGroup ? groupMetadata.participants : '';
-    BotsApp.groupAdmins = BotsApp.isGroup ? getGroupAdmins(BotsApp.groupMembers) : '';
-    BotsApp.groupId = BotsApp.isGroup ? groupMetadata.id : '';
-    BotsApp.isSenderSUDO = SUDOstring.includes(BotsApp.sender.substring(0,BotsApp.sender.indexOf("@")));
-    BotsApp.isBotGroupAdmin = BotsApp.isGroup ? (BotsApp.groupAdmins.includes(BotsApp.owner)) : false;
-    BotsApp.isSenderGroupAdmin = BotsApp.isGroup ? (BotsApp.groupAdmins.includes(BotsApp.sender)) : false;
+    lechatbot.chatId = messageInstance.key.remoteJid || '';
+    lechatbot.fromMe = messageInstance.key.fromMe;
+    lechatbot.owner = client.user.jid || '';
+    lechatbot.mimeType = messageInstance.message ? Object.keys(messageInstance.message)[0] : null;
+    lechatbot.type = lechatbot.mimeType === 'imageMessage' ? 'image' : (lechatbot.mimeType === 'videoMessage') ? 'video' : (lechatbot.mimeType === 'conversation' || lechatbot.mimeType == 'extendedTextMessage') ? 'text' : (lechatbot.mimeType === 'audioMessage') ? 'audio' : (lechatbot.mimeType === 'stickerMessage') ? 'sticker' : '';
+    lechatbot.isReply = (lechatbot.mimeType === 'extendedTextMessage' && messageInstance.message.extendedTextMessage.hasOwnProperty('contextInfo') && messageInstance.message.extendedTextMessage.contextInfo.hasOwnProperty('stanzaId'));
+    lechatbot.replyMessageId = (lechatbot.isReply && messageInstance.message.extendedTextMessage.contextInfo) ? messageInstance.message.extendedTextMessage.contextInfo.stanzaId : '';
+    lechatbot.replyMessage = (lechatbot.isReply && messageInstance.message.extendedTextMessage.contextInfo) ? messageInstance.message.extendedTextMessage.contextInfo.quotedMessage.conversation : '';
+    lechatbot.replyParticipant = (lechatbot.isReply && messageInstance.message.extendedTextMessage.contextInfo) ? messageInstance.message.extendedTextMessage.contextInfo.participant : '';
+    lechatbot.body = lechatbot.mimeType === 'conversation' ? messageInstance.message.conversation : (lechatbot.mimeType == 'imageMessage') ? messageInstance.message.imageMessage.caption : (lechatbot.mimeType == 'videoMessage') ? messageInstance.message.videoMessage.caption : (lechatbot.mimeType == 'extendedTextMessage') ? messageInstance.message.extendedTextMessage.text : (lechatbot.mimeType == 'buttonsResponseMessage') ? messageInstance.message.buttonsResponseMessage.selectedDisplayText :'';
+    lechatbot.isCmd = prefixRegex.test(lechatbot.body);
+    lechatbot.commandName = lechatbot.isCmd ? lechatbot.body.slice(1).trim().split(/ +/).shift().toLowerCase() : '';
+    lechatbot.isImage = lechatbot.type === "image";
+    lechatbot.isReplyImage = lechatbot.isReply ? jsonMessage.indexOf("imageMessage") !== -1 : false;
+    lechatbot.imageCaption = lechatbot.isImage ? messageInstance.message.imageMessage.caption : '';
+    lechatbot.isGIF = (lechatbot.type === 'video' && messageInstance.message.videoMessage.gifPlayback);
+    lechatbot.isReplyGIF = lechatbot.isReply ? (jsonMessage.indexOf("videoMessage") !== -1 && messageInstance.message.extendedTextMessage.contextInfo.quotedMessage.videoMessage.gifPlayback) : false;
+    lechatbot.isSticker = lechatbot.type === 'sticker';
+    lechatbot.isReplySticker = lechatbot.isReply ? jsonMessage.indexOf("stickerMessage") !== -1 : false;
+    lechatbot.isReplyAnimatedSticker = lechatbot.isReplySticker ? messageInstance.message.extendedTextMessage.contextInfo.quotedMessage.stickerMessage.isAnimated :false;
+    lechatbot.isVideo = (lechatbot.type === 'video' && !messageInstance.message.videoMessage.gifPlayback);
+    lechatbot.isReplyVideo = lechatbot.isReply ? (jsonMessage.indexOf("videoMessage") !== -1 && !messageInstance.message.extendedTextMessage.contextInfo.quotedMessage.videoMessage.gifPlayback) : false;
+    lechatbot.isAudio = lechatbot.type === 'audio';
+    lechatbot.isReplyAudio = lechatbot.isReply ? jsonMessage.indexOf("audioMessage") !== -1 : false;
+    lechatbot.logGroup = client.user.jid || '';
+    lechatbot.isGroup = lechatbot.chatId.endsWith('@g.us');
+    lechatbot.isPm = !lechatbot.isGroup;
+    lechatbot.sender =  (lechatbot.isGroup && messageInstance.message && lechatbot.fromMe) ? lechatbot.owner : (lechatbot.isGroup && messageInstance.message) ? messageInstance.participant : (!lechatbot.isGroup) ? lechatbot.chatId: '';
+    lechatbot.groupName = lechatbot.isGroup ? groupMetadata.subject : '';
+    lechatbot.groupMembers = lechatbot.isGroup ? groupMetadata.participants : '';
+    lechatbot.groupAdmins = lechatbot.isGroup ? getGroupAdmins(lechatbot.groupMembers) : '';
+    lechatbot.groupId = lechatbot.isGroup ? groupMetadata.id : '';
+    lechatbot.isSenderSUDO = SUDOstring.includes(lechatbot.sender.substring(0,lechatbot.sender.indexOf("@")));
+    lechatbot.isBotGroupAdmin = lechatbot.isGroup ? (lechatbot.groupAdmins.includes(lechatbot.owner)) : false;
+    lechatbot.isSenderGroupAdmin = lechatbot.isGroup ? (lechatbot.groupAdmins.includes(lechatbot.sender)) : false;
 
-    return BotsApp;
+    return lechatbot;
 }
 
 function getGroupAdmins(participants){
