@@ -12,7 +12,7 @@ module.exports = {
         isEnabled: true,
         text: [
             ".tr やめてください",
-            ".tr how are you | hindi",
+            ".tr how are you dark| hindi",
             ".tr how are you | hi",
         ],
     },
