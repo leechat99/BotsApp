@@ -1,21 +1,21 @@
 {
-  "name": "BotsApp",
+  "name": "lechatbot",
   "description": "The most user friendly and easy to use WhatsApp bot.",
   "logo": "https://i.imgur.com/xw9lULI.jpg",
   "keywords": [
       "Whatsapp",
       "WhatsApp bot",
       "userbot",
-      "BotsApp",
+      "lechatbot",
       "nodejs"
   ],
-  "repository": "https://github.com/BotsAppOfficial/BotsApp",
+  "repository": "https://github.com/leechat99/lechatbot",
   "website": "",
   "success_url": "",
   "stack": "container",
   "env": {
       "STRING_SESSION": {
-          "description": "Your BotsApp session. Can be obtained via website or running npm start locally.",
+          "description": "Your lechatbot session. Can be obtained via website or running npm start locally.",
           "value": "", 
           "required": true
       },
