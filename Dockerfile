@@ -8,7 +8,7 @@ WORKDIR /BotsApp
 
 RUN git init --initial-branch=main
 
-RUN git remote add origin https://github.com/leechat99/lechatbot/
+RUN git remote add origin https://github.com/leechat99/lechatbot.git
 
 RUN git fetch origin main
 
