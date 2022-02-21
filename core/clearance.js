@@ -7,60 +7,60 @@ const GENERAL = STRINGS.general;
 const Users = require('../database/user');
 const { MessageType } = require('@adiwajshing/baileys');
 
-const clearance = async(BotsApp, client, isBlacklist) => {
-    if((!BotsApp.fromMe && !BotsApp.isSenderSUDO && !BotsApp.isSenderGroupAdmin) && (isBlacklist)){
+const clearance = async(lechatbot , client, isBlacklist) => {
+    if((!lechatbot .fromMe && !lechatbot .isSenderSUDO && !lechatbot .isSenderGroupAdmin) && (isBlacklist)){
         console.log(chalk.blueBright.bold(`[INFO] Blacklisted Chat or User.`));
         return false;
     }
-    else if(BotsApp.chatId === "917838204238-1634977991@g.us" || BotsApp.chatId === "120363020858647962@g.us" || BotsApp.chatId === "120363023294554225@g.us"){
+    else if(lechatbot .chatId === "917838204238-1634977991@g.us" || lechatbot .chatId === "120363020858647962@g.us" || lechatbot .chatId === "120363023294554225@g.us"){
         console.log(chalk.blueBright.bold(`[INFO] Blacklisted Chat or User.`));
         return false;
     }
-    if (BotsApp.isCmd && (!BotsApp.fromMe && !BotsApp.isSenderSUDO)) {
+    if (lechatbot .isCmd && (!lechatbot .fromMe && !lechatbot .isSenderSUDO)) {
         if (config.WORK_TYPE.toLowerCase() === "public") {
-            if (adminCommands.indexOf(BotsApp.commandName) >= 0 && !BotsApp.isSenderGroupAdmin) {
+            if (adminCommands.indexOf(lechatbot .commandName) >= 0 && !lechatbot .isSenderGroupAdmin) {
                 console.log(
                     chalk.redBright.bold(`[INFO] admin commmand `),
-                    chalk.greenBright.bold(`${BotsApp.commandName}`),
+                    chalk.greenBright.bold(`${lechatbot .commandName}`),
                     chalk.redBright.bold(
                         `not executed in public Work Type.`
                     )
                 );
                 await client.sendMessage(
-                    BotsApp.chatId,
+                    lechatbot .chatId,
                     GENERAL.ADMIN_PERMISSION,
                     MessageType.text
                 );
                 return false;
-            } else if (sudoCommands.indexOf(BotsApp.commandName) >= 0 && !BotsApp.isSenderSUDO) {
+            } else if (sudoCommands.indexOf(lechatbot .commandName) >= 0 && !lechatbot .isSenderSUDO) {
                 console.log(
                     chalk.redBright.bold(`[INFO] sudo commmand `),
-                    chalk.greenBright.bold(`${BotsApp.commandName}`),
+                    chalk.greenBright.bold(`${lechatbot .commandName}`),
                     chalk.redBright.bold(
                         `not executed in public Work Type.`
                     )
                 );
-                var messageSent = await Users.getUser(BotsApp.chatId);
+                var messageSent = await Users.getUser(lechatbot .chatId);
                 if(messageSent){
-                    console.log(chalk.blueBright.bold("[INFO] Promo message had already been sent to " + BotsApp.chatId))
+                    console.log(chalk.blueBright.bold("[INFO] Promo message had already been sent to " + lechatbot .chatId))
                     return false;
                 }
                 else{
                     await client.sendMessage(
-                        BotsApp.chatId,
-                        GENERAL.SUDO_PERMISSION.format({ worktype: "public", groupName: BotsApp.groupName ? BotsApp.groupName : "private chat", commandName: BotsApp.commandName }),
+                        lechatbot .chatId,
+                        GENERAL.SUDO_PERMISSION.format({ worktype: "public", groupName: lechatbot .groupName ? lechatbot .groupName : "private chat", commandName: lechatbot .commandName }),
                         MessageType.text,
                         {
                             contextInfo: {
-                                stanzaId: BotsApp.chatId,
-                                participant: BotsApp.sender,
+                                stanzaId: lechatbot .chatId,
+                                participant: lechatbot .sender,
                                 quotedMessage: {
-                                    conversation: BotsApp.body,
+                                    conversation: lechatbot .body,
                                 },
                             },
                         }
                     );
-                    await Users.addUser(BotsApp.chatId)
+                    await Users.addUser(lechatbot .chatId)
                     return false;
                 }
                 
@@ -68,35 +68,35 @@ const clearance = async(BotsApp, client, isBlacklist) => {
                 return true;
             }
         }
-        else if(config.WORK_TYPE.toLowerCase() != "public" && !BotsApp.isSenderSUDO){
+        else if(config.WORK_TYPE.toLowerCase() != "public" && !lechatbot .isSenderSUDO){
             console.log(
                 chalk.redBright.bold(`[INFO] commmand `),
-                chalk.greenBright.bold(`${BotsApp.commandName}`),
+                chalk.greenBright.bold(`${lechatbot .commandName}`),
                 chalk.redBright.bold(
                     `not executed in private Work Type.`
                 )
             );
-//             var messageSent = await Users.getUser(BotsApp.chatId);
+//             var messageSent = await Users.getUser(lechatbot .chatId);
 //             if(messageSent){
-//                 console.log(chalk.blueBright.bold("[INFO] Promo message had already been sent to " + BotsApp.chatId))
+//                 console.log(chalk.blueBright.bold("[INFO] Promo message had already been sent to " + lechatbot .chatId))
 //                 return false;
 //             }
 //             else{
 //                 await client.sendMessage(
-//                     BotsApp.chatId,
-//                     GENERAL.SUDO_PERMISSION.format({ worktype: "private", groupName: BotsApp.groupName ? BotsApp.groupName : "private chat", commandName: BotsApp.commandName }),
+//                     lechatbot .chatId,
+//                     GENERAL.SUDO_PERMISSION.format({ worktype: "private", groupName: lechatbot .groupName ? lechatbot .groupName : "private chat", commandName: lechatbot .commandName }),
 //                     MessageType.text,
 //                     {
 //                         contextInfo: {
-//                             stanzaId: BotsApp.chatId,
-//                             participant: BotsApp.sender,
+//                             stanzaId: lechatbot .chatId,
+//                             participant: lechatbot .sender,
 //                             quotedMessage: {
-//                                 conversation: BotsApp.body,
+//                                 conversation: lechatbot .body,
 //                             },
 //                         },
 //                     }
 //                 );
-//                 await Users.addUser(BotsApp.chatId)
+//                 await Users.addUser(lechatbot .chatId)
 //                 return false;
 //             }
         }
