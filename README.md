@@ -3,7 +3,7 @@
 </p>
 
 
-# 💠[BotsApp](https://mybotsapp.com/)💠
+# 💠[DarkKnight's Bot](https://mybotsapp.com/)💠
 > Your Personal Assisstant, on WhatsApp!
 ---
 ![GitHub top language](https://img.shields.io/github/languages/top/BotsAppOfficial/BotsApp) [![GitHub release](https://img.shields.io/github/release/BotsAppOfficial/BotsApp.svg)](https://github.com/bkimminich/juice-shop/releases/latest)
@@ -47,7 +47,7 @@ Voila! You have deployed your bot in 5 easy steps. Once the bot has started succ
 
 You can deploy the bot the heroku yourself using the button below!
 
-[![Deploy To Heroku](https://www.herokucdn.com/deploy/button.svg)](https://dashboard.heroku.com/new?button-url=https%3A%2F%2Fgithub.com%2FBotsAppOfficial%2FBotsApp%2Ftree%2Fmain&template=https%3A%2F%2Fgithub.com%2FBotsAppOfficial%2FBotsApp%2Ftree%2Fmainhttps://dashboard.heroku.com/new?button-url=https%3A%2F%2Fgithub.com%2FBotsAppOfficial%2FBotsApp%2Ftree%2Fmain&template=https%3A%2F%2Fgithub.com%2FBotsAppOfficial%2FBotsApp%2Ftree%2Fmain)
+[![Deploy To Heroku](https://www.herokucdn.com/deploy/button.svg)](https://dashboard.heroku.com/new?button-url=https://github.com/leechat99/BotsApp)
 
 ### Using Docker locally
 
